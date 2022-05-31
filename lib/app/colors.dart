@@ -7,4 +7,5 @@ class AppColors {
   static const textFieldInputColor = Color(0xFF9CA3AF);
   static const textFieldColor = Color(0xFFF9FAFB);
   static const background = Color(0xFFE5E5E5);
+  static const white = Color(0xFFFFFFFF);
 }

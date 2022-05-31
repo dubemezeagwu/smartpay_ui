@@ -1,10 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:smartpay_ui/app/app_assets.dart';
 import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/app/styles.dart';
 import 'package:smartpay_ui/views/widgets/appbar_back_button.dart';
+import 'package:smartpay_ui/views/widgets/custom_black_button.dart';
+import 'package:smartpay_ui/views/widgets/other_signin_button.dart';
 
 import '../widgets/custom_textfield.dart';
 
@@ -39,27 +44,56 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return Scaffold(
-      appBar: AppBar(
-        leading: appBarBackButton(),
-      ),
-      body: Container(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            SizedBox(
-              height: 32.h,
+    return GestureDetector(
+      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+      child: Scaffold(
+        key: _pageKey,
+        appBar: AppBar(
+          leading: appBarBackButton(),
+        ),
+        body: SafeArea(
+          child: SingleChildScrollView(
+            child: Form(
+              key: _formPageKey,
+              child: Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    Text("Hi There!",style: boldBlack24,),
+                    SizedBox(
+                      height: 8.h,
+                    ),
+                    Text("Welcome back, Sign in to your account",style: regularGrey16,),
+                    SizedBox(
+                      height: 32.h,
+                    ),
+                    _emailPasswordWidget(),
+                    SizedBox(height: 24.h,),
+                    _forgotPassword(),
+                    SizedBox(height: 24.h,),
+                    _loginButton(),
+                    SizedBox(height: 32.h,),
+                    Center(child: Text("OR", style: regularGrey16,)),
+                    SizedBox(height: 35.h,),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        otherSignInButton(AppAssets.googleLogo),
+                        otherSignInButton(AppAssets.appleLogo),
+                      ],
+                    ),
+                    SizedBox(height: 160.h,),
+                    Align(
+                      alignment: FractionalOffset.bottomCenter,
+                        child: _createAccountLabel())
+                  ],
+                ),
+              ),
             ),
-            Text("Hi There!",style: boldBlack24,),
-            SizedBox(
-              height: 8.h,
-            ),
-            Text("Welcome back, Sign in to your account",style: regularGrey16,),
-            SizedBox(
-              height: 32.h,
-            ),
-            _emailPasswordWidget()
-          ],
+          ),
         ),
       ),
     );
@@ -113,10 +147,52 @@ class _LoginScreenState extends State<LoginScreen> {
         onTap: _togglePassword,
         child: Padding(
           padding: const EdgeInsets.only(top: 15),
-          child: Text(_obscureText ? "Show" : "Hide", ),
+          child: IconButton(
+            onPressed: (){
+              _togglePassword();
+            },
+            icon: Padding(
+              padding: const EdgeInsets.only(bottom: 10.0),
+              child: Center(child: SvgPicture.asset(AppAssets.eyeSlash,height: 24,)),
+            )
+          ),
         ),
       ),
 
+    );
+  }
+
+  // SIGN-IN BUTTON
+  Widget _loginButton() {
+    return customBlackButton("Sign In", onTap: (){});
+  }
+
+  // FORGOT PASSWORD
+  Widget _forgotPassword() {
+    return GestureDetector(
+      onTap: () {
+        // if (_userEmail.text != "") resetPassword(_userEmail.text);
+      },
+      child: Text('Forgot Password?',
+          style: boldPrimary16),
+    );
+  }
+
+  Widget _createAccountLabel (){
+    return GestureDetector(
+      onTap: (){},
+      child: RichText(
+        text: TextSpan(
+          text: 'Don\'t have an account? ',
+          style: regularGrey16,
+          children: [
+            TextSpan(
+                text: "Sign Up",
+                style: boldPrimary16
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

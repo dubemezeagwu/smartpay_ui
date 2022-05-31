@@ -44,3 +44,18 @@ TextStyle regularPrimary9 = GoogleFonts.roboto(
   ),
 );
 
+TextStyle boldPrimary16 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 16.sp,
+      color: AppColors.primary,
+      fontWeight: FontWeight.w700
+  ),
+);
+
+TextStyle boldWhite16 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 16.sp,
+      color: AppColors.white,
+      fontWeight: FontWeight.w700
+  ),
+);

@@ -35,6 +35,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle? style = textFieldInput16;
     return TextFormField(
+      cursorColor: AppColors.black,
       key: textFormKey,
       controller: controller,
       obscureText: obscureText!,
@@ -52,9 +53,7 @@ class CustomTextField extends StatelessWidget {
           ),
           border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(16.h),
-            borderSide: BorderSide(
-              color: Colors.white
-            )
+            borderSide: BorderSide.none
           ),
           filled: true,
           fillColor: AppColors.textFieldColor,
