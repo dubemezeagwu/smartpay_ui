@@ -28,6 +28,14 @@ TextStyle regularGrey16 = GoogleFonts.roboto(
   ),
 );
 
+TextStyle textFieldInput16 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 16.sp,
+      color: AppColors.textFieldInputColor,
+      fontWeight: FontWeight.w300
+  ),
+);
+
 TextStyle regularPrimary9 = GoogleFonts.roboto(
   textStyle: TextStyle(
       fontSize: 9.sp,
