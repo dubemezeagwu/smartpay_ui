@@ -14,11 +14,11 @@ class SizeConfig {
   }
 
   static double getHeight(double height) {
-    return _mediaQueryData!.size.height * (height / 814);
+    return _mediaQueryData!.size.height * (height / 812);
   }
 
   static double getWidth(double width) {
-    return _mediaQueryData!.size.width * (width / 360);
+    return _mediaQueryData!.size.width * (width / 375);
   }
 
   static double getTextSize(double textSize) {

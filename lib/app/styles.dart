@@ -12,6 +12,22 @@ TextStyle regularBlack9 = GoogleFonts.roboto(
   ),
 );
 
+TextStyle boldBlack24 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 24.sp,
+      color: AppColors.black,
+      fontWeight: FontWeight.w700
+  ),
+);
+
+TextStyle regularGrey16 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 16.sp,
+      color: AppColors.grey,
+      fontWeight: FontWeight.w300
+  ),
+);
+
 TextStyle regularPrimary9 = GoogleFonts.roboto(
   textStyle: TextStyle(
       fontSize: 9.sp,

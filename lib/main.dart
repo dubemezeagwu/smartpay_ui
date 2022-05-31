@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 
 void main() {
@@ -12,11 +13,21 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
+        scaffoldBackgroundColor: AppColors.background,
+        backgroundColor: AppColors.background,
+        appBarTheme: const AppBarTheme(
+          elevation: 0,
+          color: AppColors.background,
+        ),
         primarySwatch: Colors.blue,
       ),
-      home: LoginScreen()
+      home: Container(
+        color: AppColors.background,
+          padding: EdgeInsets.symmetric(horizontal: 24),
+          child: LoginScreen())
     );
   }
 }
