@@ -4,9 +4,9 @@ import 'package:smartpay_ui/app/config/extensions.dart';
 
 import '../../app/colors.dart';
 
-Widget appBarBackButton (){
+Widget appBarBackButton ({void Function()? onTap}){
   return GestureDetector(
-    onTap: (){},
+    onTap: onTap,
     child: Container(
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.sp),
