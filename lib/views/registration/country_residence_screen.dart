@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/views/widgets/country_list_picker.dart';
 
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
@@ -68,7 +69,8 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
                       SizedBox(
                         height: 32.h,
                       ),
-                      _emailWidget(),
+                      countryListPicker(),
+                      // _emailWidget(),
                       SizedBox(height: 143.h,),
                       // SizedBox(height: 32.h,),
                     ],
