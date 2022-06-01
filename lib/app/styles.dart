@@ -20,6 +20,14 @@ TextStyle boldBlack24 = GoogleFonts.roboto(
   ),
 );
 
+TextStyle boldPrimary24 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 24.sp,
+      color: AppColors.primary,
+      fontWeight: FontWeight.w700
+  ),
+);
+
 TextStyle regularGrey16 = GoogleFonts.roboto(
   textStyle: TextStyle(
       fontSize: 16.sp,

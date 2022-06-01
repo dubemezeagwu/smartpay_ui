@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
-import 'package:smartpay_ui/core/routes/routes.dart';
-import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
 
-import '../../app/app_assets.dart';
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
+import '../../core/routes/routes.dart';
+import '../login/otp_auth_screen.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 import '../widgets/custom_textfield.dart';
-class PasswordRecoveryScreen extends StatefulWidget {
-  const PasswordRecoveryScreen({Key? key}) : super(key: key);
+
+class CountryResidenceScreen extends StatefulWidget {
+  const CountryResidenceScreen({Key? key}) : super(key: key);
 
   @override
-  State<PasswordRecoveryScreen> createState() => _PasswordRecoveryScreenState();
+  State<CountryResidenceScreen> createState() => _CountryResidenceScreenState();
 }
 
-class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
+class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
 
   late TextEditingController _userEmail;
   late TextEditingController _userPassword;
@@ -27,7 +26,6 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
   @override
   void initState() {
     _userEmail = TextEditingController(text: "");
-    _userPassword = TextEditingController(text: "");
     super.initState();
   }
 
@@ -47,8 +45,8 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
         appBar: AppBar(
           leading: appBarBackButton(
               onTap: (){
-            Navigator.of(context).pop();
-          }),
+                Navigator.of(context).pop();
+              }),
         ),
         body: SizedBox(
           child: SafeArea(
@@ -62,11 +60,11 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
                       SizedBox(
                         height: 32.h,
                       ),
-                      Text("Password Recovery",style: boldBlack24,),
+                      Text("Country of Residence",style: boldBlack24,),
                       SizedBox(
                         height: 8.h,
                       ),
-                      Text("Enter your registered email below to receive password instructions",style: regularGrey16,),
+                      Text("Please select all the countries that you’re a tax resident in",style: regularGrey16,),
                       SizedBox(
                         height: 32.h,
                       ),
@@ -76,7 +74,7 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
                     ],
                   ),
                   Spacer(),
-                  _sendVerificationButton(),
+                  _continueButton(),
                   SizedBox(height: 10,)
                 ],
               ),
@@ -111,10 +109,10 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
     );
   }
 
-  // SEND VERIFICATION BUTTON
-  Widget _sendVerificationButton() {
-    return customBlackButton("Send Verification Code", onTap: (){
-      routeTo(context, OTPAuthenticationScreen());
+  // CONTINUE BUTTON
+  Widget _continueButton() {
+    return customBlackButton("Continue", onTap: (){
+      // routeTo(context, OTPAuthenticationScreen());
     });
   }
 
