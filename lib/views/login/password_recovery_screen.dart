@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/routes/routes.dart';
+import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
 
 import '../../app/app_assets.dart';
 import '../../app/config/size_config.dart';
@@ -50,31 +52,39 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
             Navigator.of(context).pop();
           }),
         ),
-        body: SafeArea(
-          child: SingleChildScrollView(
+        // floatingActionButton: Padding(
+        //   padding: const EdgeInsets.only(left: 24),
+        //   child: customBlackButton("Send Verification Code"),
+        // ),
+        body: SizedBox(
+          child: SafeArea(
             child: Form(
               key: _formPageKey,
-              child: Container(
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    Text("Password Recovery",style: boldBlack24,),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text("Enter your registered email below to receive password instructions",style: regularGrey16,),
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    _emailWidget(),
-                    SizedBox(height: 143.h,),
-                    _sendVerificationButton(),
-                    SizedBox(height: 32.h,),
-                  ],
-                ),
+              child: Column(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Text("Password Recovery",style: boldBlack24,),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Text("Enter your registered email below to receive password instructions",style: regularGrey16,),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      _emailWidget(),
+                      SizedBox(height: 143.h,),
+                      // SizedBox(height: 32.h,),
+                    ],
+                  ),
+                  Spacer(),
+                  _sendVerificationButton(),
+                  SizedBox(height: 10,)
+                ],
               ),
             ),
           ),
@@ -109,7 +119,9 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
 
   // SEND VERIFICATION BUTTON
   Widget _sendVerificationButton() {
-    return customBlackButton("Send Verification Code", onTap: (){});
+    return customBlackButton("Send Verification Code", onTap: (){
+      routeTo(context, OTPAuthenticationScreen());
+    });
   }
 
 }

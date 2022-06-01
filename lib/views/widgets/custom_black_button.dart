@@ -9,7 +9,7 @@ Widget customBlackButton (String text, {void Function()? onTap}){
   return GestureDetector(
     onTap: onTap,
     child: Container(
-      width: SizeConfig.screenWidth,
+      width: 327.h,
       height: 56.h,
       alignment: Alignment.center,
       decoration: const BoxDecoration(

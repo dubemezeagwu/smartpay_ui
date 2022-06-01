@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 
@@ -15,11 +16,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: 24.h),
+      padding: const EdgeInsets.symmetric(horizontal: 24),
       color: AppColors.background,
       child: MaterialApp(
         onGenerateRoute: generateRoute,
-        initialRoute: "/login_screen",
+        initialRoute: '/login_screen',
         debugShowCheckedModeBanner: false,
         title: 'SmartPay',
         theme: ThemeData(
@@ -31,7 +32,6 @@ class MyApp extends StatelessWidget {
           ),
           primarySwatch: Colors.blue,
         ),
-        home: LoginScreen()
       ),
     );
   }
