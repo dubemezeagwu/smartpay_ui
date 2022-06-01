@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
-import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
-import 'package:smartpay_ui/views/login/new_password_screen.dart';
+import 'package:smartpay_ui/views/registration/signup_confirmation_screen.dart';
+
+import '../../app/colors.dart';
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
 import '../../core/routes/routes.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 
-class OTPAuthenticationScreen extends StatefulWidget {
-  const OTPAuthenticationScreen({Key? key}) : super(key: key);
+class CreatePINScreen extends StatefulWidget {
+  const CreatePINScreen({Key? key}) : super(key: key);
 
   @override
-  State<OTPAuthenticationScreen> createState() => _OTPAuthenticationScreenState();
+  State<CreatePINScreen> createState() => _CreatePINScreenState();
 }
 
-class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
+class _CreatePINScreenState extends State<CreatePINScreen> {
 
   bool _isButtonEnabled = false;
   late TextEditingController _pinCode;
@@ -33,8 +33,8 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
 
   @override
   void dispose() {
-    _pinCode.dispose();
     _isButtonEnabled = false;
+    _pinCode.dispose();
     super.dispose();
   }
   @override
@@ -46,9 +46,9 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
         key: _pageKey,
         appBar: AppBar(
           leading: appBarBackButton(
-            onTap: (){
-              Navigator.of(context).pop();
-            }
+              onTap: (){
+                Navigator.of(context).pop();
+              }
           ),
         ),
         body: SafeArea(
@@ -62,22 +62,21 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
                     SizedBox(
                       height: 32.h,
                     ),
-                    Text("Verify it's you",style: boldBlack24,),
+                    Text("Set your PIN Code",style: boldBlack24,),
                     SizedBox(
                       height: 8.h,
                     ),
-                    Text("We send a code to ( *****@mail.com ). Enter it here to verify your identity",style: regularGrey16,),
+                    Text("We use state-of-the-art security measures to protect your information at all times",style: regularGrey16,),
                     SizedBox(
                       height: 32.h,
                     ),
                     _pinCodeTextField(),
-                    Center(child: _resendCode()),
                     SizedBox(height: 32.h,),
 
                   ],
                 ),
                 const Spacer(),
-                _confirmButton(_isButtonEnabled),
+                _createPINButton(_isButtonEnabled),
                 SizedBox(height: 10.h,)
               ],
             ),
@@ -88,46 +87,46 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
   }
 
 
+
+  // PIN CODE TEXT-FIELD
   Widget _pinCodeTextField (){
     return PinCodeTextField(
       controller: _pinCode,
-      keyboardType: TextInputType.number,
+      blinkWhenObscuring: true,
+      obscuringCharacter: "●",
       animationType: AnimationType.fade,
       animationCurve: Curves.easeInOut,
-      cursorColor: AppColors.black,
-      enableActiveFill: true,
-        appContext: context,
-        length: 5,
-        onCompleted: (_){
-          setState(() {
-            _isButtonEnabled = true;
-          });
-        },
+      keyboardType: TextInputType.number,
+      cursorColor: AppColors.primary,
+      enableActiveFill: false,
+      appContext: context,
+      length: 5,
+      onChanged: (String value){},
+      onCompleted: (_){
+        setState(() {
+          _isButtonEnabled = true;
+        });
+      },
       pastedTextStyle: boldBlack24,
-      obscureText: false,
+      obscureText: true,
       pinTheme: PinTheme(
-        shape: PinCodeFieldShape.box,
-        borderRadius: BorderRadius.circular(12),
-        fieldHeight: 56.h,
-        fieldWidth: 56.w,
+          shape: PinCodeFieldShape.underline,
         selectedColor: AppColors.primary,
-        activeColor: Colors.transparent,
-        inactiveColor: Colors.transparent,
-        selectedFillColor: AppColors.textFieldInputColor,
-        inactiveFillColor: AppColors.textFieldInputColor,
-        activeFillColor: AppColors.textFieldInputColor
-      ), onChanged: (String value) {},
+        inactiveColor: AppColors.primary,
+        activeColor: AppColors.primary
+      ),
     );
   }
-
   // CONFIRM BUTTON
-  Widget _confirmButton(bool isButtonEnabled) {
-    return customBlackButton("Confirm",
+  Widget _createPINButton(bool isButtonEnabled) {
+    return customBlackButton(
+        "Create PIN",
         isButtonEnabled,
         onTap: _isButtonEnabled == false
             ? (){}
-            : (){ routeTo(context, NewPasswordScreen());}
-    );
+            : (){routeTo(context, SignUpConfirmationScreen());
+        }
+        );
   }
 
   // FORGOT PASSWORD

@@ -94,8 +94,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       children: [
                         _registrationWidget(),
                         SizedBox(height: 24.h,),
-                        _forgotPassword(),
-                        SizedBox(height: 24.h,),
                         _signupButton(),
                         SizedBox(height: 32.h,),
                         Center(child: Text("OR", style: regularGrey16,)),
@@ -113,7 +111,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             ),
                           ],
                         ),
-                        SizedBox(height: 90.h,),
+                        SizedBox(height: 120.h,),
                       ],
                     ),
                     Align(
@@ -156,6 +154,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // NAME WIDGET
   Widget _fullNameField() {
     return CustomTextField(
+      keyboardType: TextInputType.name,
       enabled: true,
       title: 'Full Name',
       textFormKey: Key("fullName"),
@@ -170,6 +169,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // INSERT EMAIL WIDGET
   Widget _emailField() {
     return CustomTextField(
+      keyboardType: TextInputType.emailAddress,
       enabled: true,
       title: 'Email',
       textFormKey: Key("userEmail"),
@@ -212,7 +212,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // SIGN-UP BUTTON
   Widget _signupButton() {
-    return customBlackButton("Sign Up", onTap: (){
+    return customBlackButton("Sign Up", true, onTap: (){
       routeTo(context, CountryResidenceScreen());
     });
   }

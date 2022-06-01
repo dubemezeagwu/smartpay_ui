@@ -5,7 +5,8 @@ class AppColors {
   static const grey = Color(0xFF6B7280);
   static const primary = Color(0xFFFFAB63);
   static const textFieldInputColor = Color(0xFF9CA3AF);
-  static const textFieldColor = Color(0xFFF9FAFB);
-  static const background = Color(0xFFE5E5E5);
+  static const textFieldColor = Color(0xFFE5E5E5);
+  static const background = Color(0xFFF9FAFB);
   static const white = Color(0xFFFFFFFF);
 }
+

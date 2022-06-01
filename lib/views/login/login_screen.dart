@@ -67,7 +67,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     SizedBox(
                       height: 32.h,
                     ),
-                    Text("Hi There!",style: boldBlack24,),
+                    Text("Hi There! 👋",style: boldBlack24,),
                     SizedBox(
                       height: 8.h,
                     ),
@@ -138,6 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
   // INSERT EMAIL WIDGET
   Widget _emailField() {
     return CustomTextField(
+      keyboardType: TextInputType.emailAddress,
       enabled: true,
       title: 'Email',
       textFormKey: Key("userEmail"),
@@ -180,7 +181,7 @@ class _LoginScreenState extends State<LoginScreen> {
 
   // SIGN-IN BUTTON
   Widget _loginButton() {
-    return customBlackButton("Sign In", onTap: (){});
+    return customBlackButton("Sign In", true, onTap: (){},);
   }
 
   // FORGOT PASSWORD

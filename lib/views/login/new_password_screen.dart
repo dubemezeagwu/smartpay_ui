@@ -167,7 +167,7 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   // SEND VERIFICATION BUTTON
   Widget _createNewPasswordButton() {
-    return customBlackButton("Create New Password", onTap: (){
+    return customBlackButton("Create New Password", true, onTap: (){
       routeTo(context, ResetPasswordSuccessScreen());
     });
   }

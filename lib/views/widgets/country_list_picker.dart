@@ -1,9 +1,8 @@
 
 import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
+import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
-import 'package:smartpay_ui/views/widgets/custom_picker_builder.dart';
-
 import '../../app/styles.dart';
 import 'appbar_back_button.dart';
 
@@ -29,7 +28,9 @@ Widget countryListPicker (){
             SizedBox(width: 16.h,),
             Text(countryCode.code.toString(), style: regularGrey16,),
             SizedBox(width: 16.h,),
-            Text(countryCode.name.toString(), style: boldBlack16,)
+            Text(countryCode.name.toString(), style: boldBlack16,),
+            SizedBox(width: 142.h,),
+            const Icon(Icons.keyboard_arrow_down,color: AppColors.black,)
           ],
         );
     },
@@ -38,7 +39,7 @@ Widget countryListPicker (){
       isShowTitle: true,
       isShowCode: true,
       isDownIcon: true,
-      showEnglishName: false,
+      showEnglishName: true,
       labelColor: Colors.blueAccent,
     ),
     onChanged: (CountryCode? code) {

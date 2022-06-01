@@ -16,6 +16,7 @@ class CustomTextField extends StatelessWidget {
     this.validator,
     this.prefixIcon,
     required this.enabled,
+    this.keyboardType,
   }) : super(key: key);
 
 
@@ -28,6 +29,7 @@ class CustomTextField extends StatelessWidget {
   final bool? enableInteractive;
   final String? Function(String?)? validator;
   final bool enabled;
+  final TextInputType? keyboardType;
 
 
 
@@ -35,6 +37,7 @@ class CustomTextField extends StatelessWidget {
   Widget build(BuildContext context) {
     TextStyle? style = textFieldInput16;
     return TextFormField(
+      keyboardType: keyboardType,
       cursorColor: AppColors.black,
       key: textFormKey,
       controller: controller,

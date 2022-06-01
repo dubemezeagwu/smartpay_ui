@@ -100,6 +100,7 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
   // INSERT EMAIL WIDGET
   Widget _emailField() {
     return CustomTextField(
+      keyboardType: TextInputType.emailAddress,
       enabled: true,
       title: 'Email',
       textFormKey: Key("userEmail"),
@@ -113,7 +114,7 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
 
   // SEND VERIFICATION BUTTON
   Widget _sendVerificationButton() {
-    return customBlackButton("Send Verification Code", onTap: (){
+    return customBlackButton("Send Verification Code", true, onTap: (){
       routeTo(context, OTPAuthenticationScreen());
     });
   }

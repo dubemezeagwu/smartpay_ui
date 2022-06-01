@@ -5,6 +5,10 @@ import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 import 'package:smartpay_ui/views/login/reset_password_success_screen.dart';
+import 'package:smartpay_ui/views/registration/country_residence_screen.dart';
+import 'package:smartpay_ui/views/registration/create_pin_screen.dart';
+import 'package:smartpay_ui/views/registration/signup_confirmation_screen.dart';
+import 'package:smartpay_ui/views/registration/signup_screen.dart';
 
 import '../../views/login/password_recovery_screen.dart';
 
@@ -39,6 +43,30 @@ Route?  generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         view: const ResetPasswordSuccessScreen(),
+        args: settings.arguments,
+      );
+    case '/signup_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const SignUpScreen(),
+        args: settings.arguments,
+      );
+    case '/country_residence_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const CountryResidenceScreen(),
+        args: settings.arguments,
+      );
+    case '/create_pin_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const CreatePINScreen(),
+        args: settings.arguments,
+      );
+    case '/signup_confirmation_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const SignUpConfirmationScreen(),
         args: settings.arguments,
       );
     default:

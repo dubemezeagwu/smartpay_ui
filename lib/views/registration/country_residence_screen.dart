@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/views/registration/create_pin_screen.dart';
 import 'package:smartpay_ui/views/widgets/country_list_picker.dart';
 
 import '../../app/config/size_config.dart';
@@ -72,7 +73,6 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
                       countryListPicker(),
                       // _emailWidget(),
                       SizedBox(height: 143.h,),
-                      // SizedBox(height: 32.h,),
                     ],
                   ),
                   Spacer(),
@@ -88,33 +88,10 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
   }
 
 
-  // EMAIL SECTION FOR PASSWORD RECOVERY SCREEN.
-  Widget _emailWidget() {
-    return Column(
-      children: <Widget>[
-        _emailField(),
-      ],
-    );
-  }
-
-  // INSERT EMAIL WIDGET
-  Widget _emailField() {
-    return CustomTextField(
-      enabled: true,
-      title: 'Email',
-      textFormKey: Key("userEmail"),
-      controller: _userEmail,
-      obscureText: false,
-      enableInteractive: false,
-      validator: (value) => (value!.isEmpty) ? "Please Enter Email" : null,
-
-    );
-  }
-
   // CONTINUE BUTTON
   Widget _continueButton() {
-    return customBlackButton("Continue", onTap: (){
-      // routeTo(context, OTPAuthenticationScreen());
+    return customBlackButton("Continue", true, onTap: (){
+      routeTo(context, CreatePINScreen());
     });
   }
 
