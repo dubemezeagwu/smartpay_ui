@@ -10,7 +10,6 @@ import '../../app/styles.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 import '../widgets/custom_textfield.dart';
-import '../widgets/other_signin_button.dart';
 class PasswordRecoveryScreen extends StatefulWidget {
   const PasswordRecoveryScreen({Key? key}) : super(key: key);
 
@@ -52,10 +51,6 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
             Navigator.of(context).pop();
           }),
         ),
-        // floatingActionButton: Padding(
-        //   padding: const EdgeInsets.only(left: 24),
-        //   child: customBlackButton("Send Verification Code"),
-        // ),
         body: SizedBox(
           child: SafeArea(
             child: Form(

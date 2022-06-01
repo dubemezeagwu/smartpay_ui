@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 
 import '../../app/app_assets.dart';
@@ -54,11 +55,11 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
           ),
         ),
         body: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formPageKey,
-              child: Container(
-                child: Column(
+          child: Form(
+            key: _formPageKey,
+            child: Column(
+              children: [
+                Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SizedBox(
@@ -75,11 +76,13 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
                     SizedBox(height: 56.h,),
                     Center(child: _resendCode()),
                     SizedBox(height: 32.h,),
-                    _loginButton(),
-                    SizedBox(height: 32.h,),
+
                   ],
                 ),
-              ),
+                const Spacer(),
+                _confirmButton(),
+                SizedBox(height: 10.h,)
+              ],
             ),
           ),
         ),
@@ -94,65 +97,11 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
     });
   }
 
-  // EMAIL & PASSWORD SECTION FOR LOGIN SCREEN.
-  Widget _emailPasswordWidget() {
-    return Column(
-      children: <Widget>[
-        _emailField(),
-        SizedBox(
-          height: 16,
-        ),
-        _passwordField(),
-      ],
-    );
-  }
-
-  // INSERT EMAIL WIDGET
-  Widget _emailField() {
-    return CustomTextField(
-      enabled: true,
-      title: 'Email',
-      textFormKey: Key("userEmail"),
-      controller: _userEmail,
-      obscureText: false,
-      enableInteractive: false,
-      validator: (value) => (value!.isEmpty) ? "Please Enter Email" : null,
-
-    );
-  }
-
-  // INSERT PASSWORD WIDGET
-  Widget _passwordField() {
-    return CustomTextField(
-      enabled: true,
-      title: 'Password',
-      textFormKey: Key("userPassword"),
-      controller: _userPassword,
-      obscureText: _obscureText,
-      enableInteractive: false,
-      validator: (value) => (value!.isEmpty) ? "Please Enter Password" : null,
-      suffixIcon: GestureDetector(
-        onTap: _togglePassword,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 15),
-          child: IconButton(
-              onPressed: (){
-                _togglePassword();
-              },
-              icon: Padding(
-                padding: const EdgeInsets.only(bottom: 10.0),
-                child: Center(child: SvgPicture.asset(AppAssets.eyeSlash,height: 24,)),
-              )
-          ),
-        ),
-      ),
-
-    );
-  }
-
-  // SIGN-IN BUTTON
-  Widget _loginButton() {
-    return customBlackButton("Sign In", onTap: (){});
+  // CONFIRM BUTTON
+  Widget _confirmButton() {
+    return customBlackButton("Confirm", onTap: (){
+      routeTo(context, NewPasswordScreen());
+    });
   }
 
   // FORGOT PASSWORD
@@ -166,23 +115,4 @@ class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
     );
   }
 
-  Widget _createAccountLabel (){
-    return GestureDetector(
-      onTap: (){
-        routeTo(context, PasswordRecoveryScreen());
-      },
-      child: RichText(
-        text: TextSpan(
-          text: 'Don\'t have an account? ',
-          style: regularGrey16,
-          children: [
-            TextSpan(
-                text: "Sign Up",
-                style: boldPrimary16
-            ),
-          ],
-        ),
-      ),
-    );
-  }
 }

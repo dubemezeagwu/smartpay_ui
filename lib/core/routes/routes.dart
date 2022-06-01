@@ -1,8 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
+import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
+import 'package:smartpay_ui/views/login/reset_password_success_screen.dart';
 
 import '../../views/login/password_recovery_screen.dart';
 
@@ -27,8 +29,20 @@ Route?  generateRoute(RouteSettings settings) {
         view: const OTPAuthenticationScreen(),
         args: settings.arguments,
       );
+    case '/new_password_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const NewPasswordScreen(),
+        args: settings.arguments,
+      );
+    case '/reset_password_success_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const ResetPasswordSuccessScreen(),
+        args: settings.arguments,
+      );
     default:
-      return CupertinoPageRoute<dynamic>(
+      return MaterialPageRoute<dynamic>(
         builder: (_) => Scaffold(
           body: Center(
             child: Text('No route defined for ${settings.name}'),

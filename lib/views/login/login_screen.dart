@@ -8,6 +8,7 @@ import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/app/styles.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
+import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 import 'package:smartpay_ui/views/widgets/appbar_back_button.dart';
 import 'package:smartpay_ui/views/widgets/custom_black_button.dart';
@@ -179,7 +180,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Widget _forgotPassword() {
     return GestureDetector(
       onTap: () {
-        // if (_userEmail.text != "") resetPassword(_userEmail.text);
+        routeTo(context, PasswordRecoveryScreen());
       },
       child: Text('Forgot Password?',
           style: boldPrimary16),
