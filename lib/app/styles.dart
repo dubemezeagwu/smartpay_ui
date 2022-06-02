@@ -75,3 +75,19 @@ TextStyle boldWhite16 = GoogleFonts.roboto(
       fontWeight: FontWeight.w700
   ),
 );
+
+TextStyle boldBlack32 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 32.sp,
+      color: AppColors.black,
+      fontWeight: FontWeight.w700
+  ),
+);
+
+TextStyle boldPrimary32 = GoogleFonts.roboto(
+  textStyle: TextStyle(
+      fontSize: 32.sp,
+      color: AppColors.primary,
+      fontWeight: FontWeight.w700
+  ),
+);

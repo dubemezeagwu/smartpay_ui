@@ -4,4 +4,5 @@ class AppAssets {
   static const googleLogo = "assets/icons/google.svg";
   static const lockIllustration = "assets/images/lock_illustration.svg";
   static const transferIllustration = "assets/images/transfer_illustration.svg";
+  static const appLogo = "assets/images/app_logo.svg";
 }

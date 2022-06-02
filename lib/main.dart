@@ -20,7 +20,7 @@ class MyApp extends StatelessWidget {
       color: AppColors.background,
       child: MaterialApp(
         onGenerateRoute: generateRoute,
-        initialRoute: '/login_screen',
+        initialRoute: '/first_onboarding_screen',
         debugShowCheckedModeBanner: false,
         title: 'SmartPay',
         theme: ThemeData(

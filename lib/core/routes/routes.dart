@@ -5,16 +5,30 @@ import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 import 'package:smartpay_ui/views/login/reset_password_success_screen.dart';
+import 'package:smartpay_ui/views/onboarding/first_onboarding_screen.dart';
 import 'package:smartpay_ui/views/registration/country_residence_screen.dart';
 import 'package:smartpay_ui/views/registration/create_pin_screen.dart';
 import 'package:smartpay_ui/views/registration/signup_confirmation_screen.dart';
 import 'package:smartpay_ui/views/registration/signup_screen.dart';
+import 'package:smartpay_ui/views/widgets/splash_screen.dart';
 
 import '../../views/login/password_recovery_screen.dart';
 
 
 Route?  generateRoute(RouteSettings settings) {
   switch (settings.name) {
+    case '/splash_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const SplashScreen(),
+        args: settings.arguments,
+      );
+    case '/first_onboarding_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const FirstOnboardingScreen(),
+        args: settings.arguments,
+      );
     case '/login_screen':
       return _getPageRoute(
         routeName: settings.name,
