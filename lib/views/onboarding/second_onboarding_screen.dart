@@ -1,23 +1,23 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:smartpay_ui/app/app_assets.dart';
-import 'package:smartpay_ui/app/colors.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
-import 'package:smartpay_ui/app/styles.dart';
+import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
-import 'package:smartpay_ui/views/onboarding/second_onboarding_screen.dart';
-import 'package:smartpay_ui/views/widgets/custom_black_button.dart';
+import 'package:smartpay_ui/views/registration/signup_screen.dart';
 
-import '../../app/config/size_config.dart';
+import '../../app/app_assets.dart';
+import '../../app/colors.dart';
+import '../../app/styles.dart';
+import '../widgets/custom_black_button.dart';
 
-class FirstOnboardingScreen extends StatefulWidget {
-  const FirstOnboardingScreen({Key? key}) : super(key: key);
+class SecondOnboardingScreen extends StatefulWidget {
+  const SecondOnboardingScreen({Key? key}) : super(key: key);
 
   @override
-  State<FirstOnboardingScreen> createState() => _FirstOnboardingScreenState();
+  State<SecondOnboardingScreen> createState() => _SecondOnboardingScreenState();
 }
 
-class _FirstOnboardingScreenState extends State<FirstOnboardingScreen> {
+class _SecondOnboardingScreenState extends State<SecondOnboardingScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
@@ -26,12 +26,7 @@ class _FirstOnboardingScreenState extends State<FirstOnboardingScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.only(top: 20.h),
-            child: GestureDetector(
-              onTap: (){
-                routeTo(context, SecondOnboardingScreen());
-              },
-                child: Text("Skip", style: boldPrimary16,)
-            ),
+            child: Text("Skip", style: boldPrimary16,),
           )
         ],
       ),
@@ -42,10 +37,10 @@ class _FirstOnboardingScreenState extends State<FirstOnboardingScreen> {
               SizedBox(height: 83.h,),
               Stack(
                 children: [
-                  Center(child: Image.asset(AppAssets.onboardingOneDevicePic)),
+                  Center(child: Image.asset(AppAssets.onboardingTwoDevicePic)),
                   Padding(
-                    padding: EdgeInsets.only(top: 20.h),
-                    child: Center(child: SvgPicture.asset(AppAssets.onboardingOneIllustrations)),
+                    padding: EdgeInsets.only(top: 80.h),
+                    child: Center(child: SvgPicture.asset(AppAssets.onboardingTwoIllustrations)),
                   ),
                   Padding(
                     padding:  EdgeInsets.only(top: 248.h),
@@ -58,14 +53,14 @@ class _FirstOnboardingScreenState extends State<FirstOnboardingScreen> {
                           SizedBox(height: 46.h,),
                           Padding(
                             padding: EdgeInsets.symmetric(horizontal: 40.h),
-                            child: Text("Finance app the safest and most trusted",
+                            child: Text("The fastest transaction process only here",
                               style: boldBlack24,
                               textAlign: TextAlign.center,),
                           ),
                           SizedBox(height: 16.h,),
                           Padding(
-                            padding: EdgeInsets.symmetric(horizontal: 8.h),
-                            child: Text("Your finance work starts here. Our here to help you track and deal with speeding up your transactions.",
+                            padding: EdgeInsets.symmetric(horizontal: 10.h),
+                            child: Text("Get easy to pay all your bills with just a few steps. Paying your bills become fast and efficient.",
                               style: regularGrey16,
                               textAlign: TextAlign.center,
                             ),
@@ -81,7 +76,12 @@ class _FirstOnboardingScreenState extends State<FirstOnboardingScreen> {
           Spacer(),
           Padding(
             padding: EdgeInsets.only(bottom: 50.h),
-            child: customBlackButton("Get Started", true),
+            child: customBlackButton(
+                "Get Started",
+                true,
+                onTap: (){
+                  routeTo(context, SignUpScreen());
+                }),
           ),
         ],)
       ,

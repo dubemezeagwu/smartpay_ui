@@ -13,6 +13,7 @@ import 'package:smartpay_ui/views/registration/signup_screen.dart';
 import 'package:smartpay_ui/views/widgets/splash_screen.dart';
 
 import '../../views/login/password_recovery_screen.dart';
+import '../../views/onboarding/second_onboarding_screen.dart';
 
 
 Route?  generateRoute(RouteSettings settings) {
@@ -27,6 +28,12 @@ Route?  generateRoute(RouteSettings settings) {
       return _getPageRoute(
         routeName: settings.name,
         view: const FirstOnboardingScreen(),
+        args: settings.arguments,
+      );
+    case '/second_onboarding_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const SecondOnboardingScreen(),
         args: settings.arguments,
       );
     case '/login_screen':

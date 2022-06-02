@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:smartpay_ui/app/app_assets.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/views/onboarding/first_onboarding_screen.dart';
 
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
+import '../../core/routes/routes.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -19,28 +21,31 @@ class _SplashScreenState extends State<SplashScreen> {
     SizeConfig.init(context);
     return Scaffold(
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            SizedBox(
-              height: 72.h,
-                width: 72.w,
-                child: SvgPicture.asset(AppAssets.appLogo)
-            ),
-            SizedBox(height: 16.h,),
-            RichText(
-              text: TextSpan(
-                text: 'Smart',
-                style: boldBlack32,
-                children: [
-                  TextSpan(
-                      text: "pay.",
-                      style: boldPrimary32
-                  ),
-                ],
+        child: GestureDetector(
+          onTap: () => routeTo(context, FirstOnboardingScreen()),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SizedBox(
+                height: 72.h,
+                  width: 72.w,
+                  child: SvgPicture.asset(AppAssets.appLogo)
               ),
-            ),
-          ],
+              SizedBox(height: 16.h,),
+              RichText(
+                text: TextSpan(
+                  text: 'Smart',
+                  style: boldBlack32,
+                  children: [
+                    TextSpan(
+                        text: "pay.",
+                        style: boldPrimary32
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
