@@ -1,11 +1,14 @@
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/adapters.dart';
 
+import '../models/login_response.dart';
+
 
 const String userBox = "userBox";
 const String isFirstKey = 'isTheFirst';
 const String myTokenKey = 'myToken';
 const String myPIN = 'myPIN';
+const String profileKey = 'profile';
 
 class AppCache {
   static Future <void> init() async {
@@ -33,6 +36,19 @@ class AppCache {
     } else {
       return null;
     }
+  }
+
+  static void setUser(LoginData user) {
+    _userBox.put(profileKey, user.toJson());
+  }
+
+  static LoginData? get getUser {
+    final dynamic data = _userBox.get(profileKey);
+    if (data == null) {
+      return null;
+    }
+    final LoginData user = LoginData.fromJson(data);
+    return user;
   }
 
   static void setMyToken(String type) async {

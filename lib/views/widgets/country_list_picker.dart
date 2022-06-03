@@ -28,9 +28,12 @@ Widget countryListPicker (){
             SizedBox(width: 16.h,),
             Text(countryCode.code.toString(), style: regularGrey16,),
             SizedBox(width: 16.h,),
-            Text(countryCode.name.toString(), style: boldBlack16,),
-            SizedBox(width: 142.h,),
-            const Icon(Icons.keyboard_arrow_down,color: AppColors.black,)
+            Expanded(child: Text(countryCode.name.toString(), style: boldBlack16, overflow: TextOverflow.fade,)),
+            // SizedBox(width: 142.h,),
+            Padding(
+              padding:  EdgeInsets.only(left: 75.w),
+              child:  const Icon(Icons.keyboard_arrow_down,color: AppColors.black,),
+            )
           ],
         );
     },
