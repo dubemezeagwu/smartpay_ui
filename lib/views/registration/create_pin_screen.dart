@@ -82,7 +82,7 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
                         ],
                       ),
                       const Spacer(),
-                      _createPINButton(_isButtonEnabled),
+                      _createPINButton(_isButtonEnabled, model),
                       SizedBox(height: 10.h,)
                     ],
                   ),
@@ -127,7 +127,7 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
     );
   }
   // CONFIRM BUTTON
-  Widget _createPINButton(bool isButtonEnabled) {
+  Widget _createPINButton(bool isButtonEnabled, AuthViewModel model) {
     return customBlackButton(
         "Create PIN",
         isButtonEnabled,
@@ -137,6 +137,8 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
           print(appPassCode);
           AppCache.setMyPIN(appPassCode);
           print("This is the App PIN ${AppCache.myPIN}");
+          print(model.tempRegisterData);
+          // model.register(data);
           // routeTo(context, SignUpConfirmationScreen());
         }
         );

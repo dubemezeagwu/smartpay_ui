@@ -10,6 +10,7 @@ import 'appbar_back_button.dart';
 Widget countryListPicker (BuildContext context, AuthViewModel model){
   return CountryListPick(
     appBar: AppBar(
+      title: Text("Select your Country",style: boldBlack16,),
       leading: appBarBackButton(
           onTap: (){
             Navigator.of(context).pop();
@@ -47,7 +48,7 @@ Widget countryListPicker (BuildContext context, AuthViewModel model){
       labelColor: Colors.blueAccent,
     ),
     onChanged: (CountryCode? code) {
-      model.tempRegisterData["countryCode"] = code?.code.toString();
+      model.tempRegisterData["countryCode"] = code!.code.toString();
       print(model.tempRegisterData["countryCode"]);
       // print(code!.name);
       // print(code.code);
