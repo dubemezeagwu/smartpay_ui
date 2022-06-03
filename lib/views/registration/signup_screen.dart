@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 import 'package:smartpay_ui/views/registration/country_residence_screen.dart';
 
@@ -8,6 +9,8 @@ import '../../app/app_assets.dart';
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
 import '../../core/routes/routes.dart';
+import '../../core/viewmodels/base_vm.dart';
+import '../base_view.dart';
 import '../login/password_recovery_screen.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
@@ -48,82 +51,86 @@ class _SignUpScreenState extends State<SignUpScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        key: _pageKey,
-        appBar: AppBar(
-          leading: appBarBackButton(
-              onTap: (){
-                Navigator.of(context).pop();
-              }),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formPageKey,
-              child: SizedBox(
-                height: SizeConfig.screenHeight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    RichText(
-                      text: TextSpan(
-                        text: 'Create a ',
-                        style: boldBlack24,
-                        children: [
-                          TextSpan(
-                              text: "Smartpay",
-                              style: boldPrimary24
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text("account",style: boldBlack24,),
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    Column(
+    return BaseView(
+      builder: (_, AuthViewModel model, __) {
+        return GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Scaffold(
+            key: _pageKey,
+            appBar: AppBar(
+              leading: appBarBackButton(
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  }),
+            ),
+            body: SafeArea(
+              child: SingleChildScrollView(
+                child: Form(
+                  key: _formPageKey,
+                  child: SizedBox(
+                    height: SizeConfig.screenHeight,
+                    child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        _registrationWidget(),
-                        SizedBox(height: 24.h,),
-                        _signupButton(),
-                        SizedBox(height: 32.h,),
-                        Center(child: Text("OR", style: regularGrey16,)),
-                        SizedBox(height: 35.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        SizedBox(
+                          height: 32.h,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: 'Create a ',
+                            style: boldBlack24,
+                            children: [
+                              TextSpan(
+                                  text: "Smartpay",
+                                  style: boldPrimary24
+                              ),
+                            ],
+                          ),
+                        ),
+                        SizedBox(
+                          height: 8.h,
+                        ),
+                        Text("account",style: boldBlack24,),
+                        SizedBox(
+                          height: 32.h,
+                        ),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            GestureDetector(
-                              onTap: (){},
-                                child: otherSignInButton(AppAssets.googleLogo)
+                            _registrationWidget(),
+                            SizedBox(height: 24.h,),
+                            _signupButton(model),
+                            SizedBox(height: 32.h,),
+                            Center(child: Text("OR", style: regularGrey16,)),
+                            SizedBox(height: 35.h,),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                    onTap: (){},
+                                    child: otherSignInButton(AppAssets.googleLogo)
+                                ),
+                                GestureDetector(
+                                    onTap: (){},
+                                    child: otherSignInButton(AppAssets.appleLogo)
+                                ),
+                              ],
                             ),
-                            GestureDetector(
-                              onTap: (){},
-                                child: otherSignInButton(AppAssets.appleLogo)
-                            ),
+                            SizedBox(height: 120.h,),
                           ],
                         ),
-                        SizedBox(height: 120.h,),
+                        Align(
+                            alignment: Alignment.bottomCenter,
+                            child: _createAccountLabel())
                       ],
                     ),
-                    Align(
-                        alignment: Alignment.bottomCenter,
-                        child: _createAccountLabel())
-                  ],
+                  ),
                 ),
               ),
             ),
           ),
-        ),
-      ),
+        );
+      },
     );
   }
 
@@ -140,11 +147,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
       children: <Widget>[
         _fullNameField(),
         SizedBox(
-          height: 16,
+          height: 16.h,
         ),
         _emailField(),
         SizedBox(
-          height: 16,
+          height: 16.h,
         ),
         _passwordField(),
       ],
@@ -211,8 +218,12 @@ class _SignUpScreenState extends State<SignUpScreen> {
   }
 
   // SIGN-UP BUTTON
-  Widget _signupButton() {
+  Widget _signupButton(AuthViewModel model) {
     return customBlackButton("Sign Up", true, onTap: (){
+      model.tempRegisterData["email"] = _userEmail.text;
+      model.tempRegisterData["password"] = _userPassword.text;
+      print(model.tempRegisterData["email"].toString());
+      print(model.tempRegisterData["password"].toString());
       routeTo(context, CountryResidenceScreen());
     });
   }

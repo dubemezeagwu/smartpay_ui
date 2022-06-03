@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
+import 'package:smartpay_ui/views/base_view.dart';
 import 'package:smartpay_ui/views/registration/create_pin_screen.dart';
 import 'package:smartpay_ui/views/widgets/country_list_picker.dart';
 
@@ -40,50 +42,52 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        key: _pageKey,
-        appBar: AppBar(
-          leading: appBarBackButton(
-              onTap: (){
-                Navigator.of(context).pop();
-              }),
-        ),
-        body: SizedBox(
-          child: SafeArea(
-            child: Form(
-              key: _formPageKey,
-              child: Column(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+    return BaseView(
+        builder: (_,AuthViewModel model, __) => GestureDetector(
+          onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+          child: Scaffold(
+            key: _pageKey,
+            appBar: AppBar(
+              leading: appBarBackButton(
+                  onTap: (){
+                    Navigator.of(context).pop();
+                  }),
+            ),
+            body: SizedBox(
+              child: SafeArea(
+                child: Form(
+                  key: _formPageKey,
+                  child: Column(
                     children: [
-                      SizedBox(
-                        height: 32.h,
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          Text("Country of Residence",style: boldBlack24,),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Text("Please select all the countries that you’re a tax resident in",style: regularGrey16,),
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          countryListPicker(context, model),
+                          // _emailWidget(),
+                          SizedBox(height: 143.h,),
+                        ],
                       ),
-                      Text("Country of Residence",style: boldBlack24,),
-                      SizedBox(
-                        height: 8.h,
-                      ),
-                      Text("Please select all the countries that you’re a tax resident in",style: regularGrey16,),
-                      SizedBox(
-                        height: 32.h,
-                      ),
-                      countryListPicker(),
-                      // _emailWidget(),
-                      SizedBox(height: 143.h,),
+                      const Spacer(),
+                      _continueButton(),
+                      SizedBox(height: 10.h,)
                     ],
                   ),
-                  Spacer(),
-                  _continueButton(),
-                  SizedBox(height: 10,)
-                ],
+                ),
               ),
             ),
           ),
         ),
-      ),
     );
   }
 

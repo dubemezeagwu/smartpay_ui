@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/storage/local_storage.dart';
+import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
+import 'package:smartpay_ui/views/base_view.dart';
 import 'package:smartpay_ui/views/registration/signup_confirmation_screen.dart';
 
 import '../../app/colors.dart';
@@ -23,6 +26,7 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
   late TextEditingController _pinCode;
   final _formPageKey = GlobalKey<FormState>();
   final _pageKey = GlobalKey<ScaffoldState>();
+  late final String appPassCode;
 
   @override
   void initState() {
@@ -40,56 +44,60 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        key: _pageKey,
-        appBar: AppBar(
-          leading: appBarBackButton(
-              onTap: (){
-                Navigator.of(context).pop();
-              }
-          ),
-        ),
-        body: SafeArea(
-          child: Form(
-            key: _formPageKey,
-            child: Column(
-              children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    Text("Set your PIN Code",style: boldBlack24,),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text("We use state-of-the-art security measures to protect your information at all times",style: regularGrey16,),
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    _pinCodeTextField(),
-                    SizedBox(height: 32.h,),
-
-                  ],
+    return BaseView(
+        builder: (_, AuthViewModel model, __){
+          return GestureDetector(
+            onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+            child: Scaffold(
+              key: _pageKey,
+              appBar: AppBar(
+                leading: appBarBackButton(
+                    onTap: (){
+                      Navigator.of(context).pop();
+                    }
                 ),
-                const Spacer(),
-                _createPINButton(_isButtonEnabled),
-                SizedBox(height: 10.h,)
-              ],
+              ),
+              body: SafeArea(
+                child: Form(
+                  key: _formPageKey,
+                  child: Column(
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          Text("Set your PIN Code",style: boldBlack24,),
+                          SizedBox(
+                            height: 8.h,
+                          ),
+                          Text("We use state-of-the-art security measures to protect your information at all times",style: regularGrey16,),
+                          SizedBox(
+                            height: 32.h,
+                          ),
+                          _pinCodeTextField(model),
+                          SizedBox(height: 32.h,),
+
+                        ],
+                      ),
+                      const Spacer(),
+                      _createPINButton(_isButtonEnabled),
+                      SizedBox(height: 10.h,)
+                    ],
+                  ),
+                ),
+              ),
             ),
-          ),
-        ),
-      ),
+          );
+        }
     );
   }
 
 
 
   // PIN CODE TEXT-FIELD
-  Widget _pinCodeTextField (){
+  Widget _pinCodeTextField (AuthViewModel model){
     return PinCodeTextField(
       controller: _pinCode,
       blinkWhenObscuring: true,
@@ -102,9 +110,10 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
       appContext: context,
       length: 5,
       onChanged: (String value){},
-      onCompleted: (_){
+      onCompleted: (value){
         setState(() {
           _isButtonEnabled = true;
+          appPassCode = value;
         });
       },
       pastedTextStyle: boldBlack24,
@@ -124,7 +133,11 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
         isButtonEnabled,
         onTap: _isButtonEnabled == false
             ? (){}
-            : (){routeTo(context, SignUpConfirmationScreen());
+            : (){
+          print(appPassCode);
+          AppCache.setMyPIN(appPassCode);
+          print("This is the App PIN ${AppCache.myPIN}");
+          // routeTo(context, SignUpConfirmationScreen());
         }
         );
   }

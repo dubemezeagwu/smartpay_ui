@@ -1,11 +1,10 @@
 import 'package:dio/dio.dart';
-import 'package:global_configuration/global_configuration.dart';
 import 'package:smartpay_ui/core/models/login_response.dart';
 import 'package:smartpay_ui/core/storage/local_storage.dart';
 
 class BaseAPI {
 
-  String baseUrl = GlobalConfiguration().getString("base_url");
+  String baseUrl = "https://smart-pay-mobile.herokuapp.com/api/v1";
 
   Dio dio = Dio(
     BaseOptions(

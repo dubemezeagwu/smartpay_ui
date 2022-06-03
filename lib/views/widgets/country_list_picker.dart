@@ -3,15 +3,16 @@ import 'package:country_list_pick/country_list_pick.dart';
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
 import '../../app/styles.dart';
 import 'appbar_back_button.dart';
 
-Widget countryListPicker (){
+Widget countryListPicker (BuildContext context, AuthViewModel model){
   return CountryListPick(
     appBar: AppBar(
       leading: appBarBackButton(
           onTap: (){
-            // Navigator.of(context).pop();
+            Navigator.of(context).pop();
           }),
     ),
     pickerBuilder: (context, CountryCode? countryCode){
@@ -46,12 +47,14 @@ Widget countryListPicker (){
       labelColor: Colors.blueAccent,
     ),
     onChanged: (CountryCode? code) {
-      print(code!.name);
-      print(code.code);
-      print(code.dialCode);
-      print(code.flagUri);
+      model.tempRegisterData["countryCode"] = code?.code.toString();
+      print(model.tempRegisterData["countryCode"]);
+      // print(code!.name);
+      // print(code.code);
+      // print(code.dialCode);
+      // print(code.flagUri);
     },
-    initialSelection: "+234",
+    initialSelection: "CA",
     useUiOverlay: true,
     useSafeArea: true,
   );

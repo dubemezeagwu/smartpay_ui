@@ -7,16 +7,18 @@ import '../models/login_response.dart';
 const String userBox = "userBox";
 const String isFirstKey = 'isTheFirst';
 const String myTokenKey = 'myToken';
-const String myPIN = 'myPIN';
+const String myAppPIN = 'myPIN';
 const String profileKey = 'profile';
 
 class AppCache {
   static Future <void> init() async {
     await Hive.initFlutter();
     await Hive.openBox<dynamic>(userBox);
+    await Hive.openBox(myAppPIN);
   }
 
   static Box<dynamic> get _userBox => Hive.box<dynamic>(userBox);
+  static Box<dynamic> get _myAppPIN => Hive.box(myAppPIN);
 
   static void haveFirstView(bool t) {
     if (isFirstKey == null) {
@@ -38,6 +40,22 @@ class AppCache {
     }
   }
 
+  static void setMyToken(String type) async {
+    await _userBox.put(myTokenKey, type);
+  }
+
+  static String? get myPIN {
+    if (_myAppPIN.containsKey(myAppPIN)) {
+      return _myAppPIN.get(myAppPIN);
+    } else {
+      return null;
+    }
+  }
+
+  static void setMyPIN(String value) async {
+    await _myAppPIN.put(myAppPIN, value);
+  }
+
   static void setUser(LoginData user) {
     _userBox.put(profileKey, user.toJson());
   }
@@ -49,10 +67,6 @@ class AppCache {
     }
     final LoginData user = LoginData.fromJson(data);
     return user;
-  }
-
-  static void setMyToken(String type) async {
-    await _userBox.put(myTokenKey, type);
   }
 
   static Future<void> clear() async {

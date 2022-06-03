@@ -3,9 +3,15 @@ import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
+import 'package:smartpay_ui/locator.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 
-void main() {
+import 'core/storage/local_storage.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await AppCache.init();
+  setUpLocator();
   runApp(const MyApp());
 }
 

@@ -13,7 +13,7 @@ class AuthViewModel extends BaseViewModel{
     "fullName": "",
     "email": "",
     "username": "",
-    "country": "",
+    "countryCode": "",
     "password": "",
     "deviceName": "web",
   };

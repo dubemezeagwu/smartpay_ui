@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
-import '../../core/viewmodels/base_vm.dart';
-import '../../locator.dart';
+import '../core/viewmodels/base_vm.dart';
+import '../locator.dart';
 
 class BaseView<T extends BaseViewModel> extends StatefulWidget {
-  const BaseView({required this.builder, this.onModelReady, required Key key}) : super(key: key);
+  const BaseView({required this.builder, this.onModelReady, Key? key}) : super(key: key);
 
   final Widget Function(BuildContext context, T model, Widget? child) builder;
   final Function(T)? onModelReady;
