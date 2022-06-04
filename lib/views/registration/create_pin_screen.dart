@@ -14,7 +14,11 @@ import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 
 class CreatePINScreen extends StatefulWidget {
-  const CreatePINScreen({Key? key}) : super(key: key);
+  const CreatePINScreen({
+    Key? key,
+    this.userRegistrationData = const {}
+  }) : super(key: key);
+  final Map<String, dynamic> userRegistrationData;
 
   @override
   State<CreatePINScreen> createState() => _CreatePINScreenState();
@@ -137,8 +141,13 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
           print(appPassCode);
           AppCache.setMyPIN(appPassCode);
           print("This is the App PIN ${AppCache.myPIN}");
-          print(model.tempRegisterData);
-          // model.register(data);
+          model.register(widget.userRegistrationData).then(
+                  (value) {
+                    if (value?.message != "success"){
+                      ScaffoldMessenger.of(context).showSnackBar(
+                          SnackBar(content: Text(value!.error.email?.first)));
+                    }
+                  });
           // routeTo(context, SignUpConfirmationScreen());
         }
         );

@@ -14,7 +14,14 @@ import '../widgets/custom_black_button.dart';
 import '../widgets/custom_textfield.dart';
 
 class CountryResidenceScreen extends StatefulWidget {
-  const CountryResidenceScreen({Key? key}) : super(key: key);
+  const CountryResidenceScreen({
+    Key? key,
+    this.userEmail = "",
+    this.userPassword = "",
+    this.fullName = ""}) : super(key: key);
+  final String userEmail ;
+  final String userPassword;
+  final String fullName;
 
   @override
   State<CountryResidenceScreen> createState() => _CountryResidenceScreenState();
@@ -22,21 +29,16 @@ class CountryResidenceScreen extends StatefulWidget {
 
 class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
 
-  late TextEditingController _userEmail;
-  late TextEditingController _userPassword;
   final _formPageKey = GlobalKey<FormState>();
   final _pageKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
-    _userEmail = TextEditingController(text: "");
     super.initState();
   }
 
   @override
   void dispose() {
-    _userEmail.dispose();
-    _userPassword.dispose();
     super.dispose();
   }
   @override
@@ -79,7 +81,15 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
                         ],
                       ),
                       const Spacer(),
-                      _continueButton(),
+                  customBlackButton("Continue", true, onTap: (){
+                    routeTo(context, CreatePINScreen(userRegistrationData: {
+                      'full_name': 'John',
+                      'email': 'demo@demo.com',
+                      'country': model.code,
+                      'password': 'Dopheus22',
+                      'device_name': 'web'
+                    },));
+                  }),
                       SizedBox(height: 10.h,)
                     ],
                   ),
@@ -92,11 +102,8 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
   }
 
 
-  // CONTINUE BUTTON
-  Widget _continueButton() {
-    return customBlackButton("Continue", true, onTap: (){
-      routeTo(context, CreatePINScreen());
-    });
-  }
+
+
+
 
 }

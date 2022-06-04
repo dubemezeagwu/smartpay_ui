@@ -220,11 +220,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
   // SIGN-UP BUTTON
   Widget _signupButton(AuthViewModel model) {
     return customBlackButton("Sign Up", true, onTap: (){
-      model.tempRegisterData["email"] = _userEmail.text;
-      model.tempRegisterData["password"] = _userPassword.text;
-      print(model.tempRegisterData["email"].toString());
-      print(model.tempRegisterData["password"].toString());
-      routeTo(context, CountryResidenceScreen());
+      routeTo(context, CountryResidenceScreen(
+        fullName: _fullName.text,
+        userPassword: _userEmail.text,
+        userEmail: _userPassword.text,
+      ));
     });
   }
 

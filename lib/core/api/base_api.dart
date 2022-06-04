@@ -2,12 +2,14 @@ import 'package:dio/dio.dart';
 import 'package:smartpay_ui/core/models/login_response.dart';
 import 'package:smartpay_ui/core/storage/local_storage.dart';
 
-class BaseAPI {
+String baseUrl = "https://smart-pay-mobile.herokuapp.com/api/v1/";
 
-  String baseUrl = "https://smart-pay-mobile.herokuapp.com/api/v1";
+class BaseAPI {
 
   Dio dio = Dio(
     BaseOptions(
+      baseUrl: baseUrl,
+      headers: {'Accept': 'application/json'},
       sendTimeout: 30000, // 30 seconds
       receiveTimeout: 30000, // 30 seconds
       contentType: "application/json",
@@ -16,10 +18,8 @@ class BaseAPI {
   );
 
   Options defaultOptions = Options(
-    sendTimeout: 20000, // 20 seconds
-    receiveTimeout: 20000, // 20 seconds
+    headers: {'Accept': 'application/json', "Authorization": "Bearer ${AppCache.myToken}"},
     contentType: "application/json",
-    validateStatus: (int? seconds) => seconds! < 500
   );
 
   String? getToken () {

@@ -48,8 +48,7 @@ Widget countryListPicker (BuildContext context, AuthViewModel model){
       labelColor: Colors.blueAccent,
     ),
     onChanged: (CountryCode? code) {
-      model.tempRegisterData["countryCode"] = code!.code.toString();
-      print(model.tempRegisterData["countryCode"]);
+      model.setCountryCode(code!.code!);
       // print(code!.name);
       // print(code.code);
       // print(code.dialCode);

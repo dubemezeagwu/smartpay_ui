@@ -11,7 +11,7 @@ class AuthAPI extends BaseAPI {
   Logger log = Logger();
 
   Future<LoginData> login(Map<String, String> data) async {
-    final String url = '$baseUrl/auth/login';
+    const String url = 'auth/login';
     try {
       final Response<dynamic> res =
       await dio.post<dynamic>(url, data: data, options: defaultOptions);
@@ -45,23 +45,22 @@ class AuthAPI extends BaseAPI {
     }
   }
 
-  Future<RegisterData> register(Map<String, String> data) async {
-    final String url = '$baseUrl/auth/register';
+  Future<dynamic> register(Map<String, dynamic> data) async {
+    const String url = 'auth/register';
     try {
-      final Response<dynamic> res =
-      await dio.post<dynamic>(url, data: data, options: defaultOptions);
+      final Response<dynamic> res = await dio.post<dynamic>(url, data: data, options: defaultOptions);
+      print(res);
 
       log.d(res.data);
       switch (res.statusCode) {
         case 200:
           try {
-            return RegisterResponse.fromJson(res.data).data;
+            return RegisterResponse.fromJson(res.data);
           } catch (e) {
-            throw "Parsing Error";
-          }
+            return RegisterResponse.fromJson(res.data);          }
           break;
         case 422:
-          throw res.data['message'].first.toString().toUpperCase();
+          return RegisterResponse.fromJson(res.data);
           break;
         case 401:
           throw "These credentials are wrong";
