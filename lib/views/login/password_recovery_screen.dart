@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
-import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
+import 'package:smartpay_ui/views/login/login_otp_auth_screen.dart';
 
 import '../../app/app_assets.dart';
 import '../../app/config/size_config.dart';
@@ -115,7 +115,7 @@ class _PasswordRecoveryScreenState extends State<PasswordRecoveryScreen> {
   // SEND VERIFICATION BUTTON
   Widget _sendVerificationButton() {
     return customBlackButton("Send Verification Code", true, onTap: (){
-      routeTo(context, OTPAuthenticationScreen());
+      routeTo(context, LoginOTPAuthenticationScreen());
     });
   }
 

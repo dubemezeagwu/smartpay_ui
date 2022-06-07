@@ -10,14 +10,14 @@ import '../../core/routes/routes.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 
-class OTPAuthenticationScreen extends StatefulWidget {
-  const OTPAuthenticationScreen({Key? key}) : super(key: key);
+class LoginOTPAuthenticationScreen extends StatefulWidget {
+  const LoginOTPAuthenticationScreen({Key? key}) : super(key: key);
 
   @override
-  State<OTPAuthenticationScreen> createState() => _OTPAuthenticationScreenState();
+  State<LoginOTPAuthenticationScreen> createState() => _LoginOTPAuthenticationScreenState();
 }
 
-class _OTPAuthenticationScreenState extends State<OTPAuthenticationScreen> {
+class _LoginOTPAuthenticationScreenState extends State<LoginOTPAuthenticationScreen> {
 
   bool _isButtonEnabled = false;
   late TextEditingController _pinCode;

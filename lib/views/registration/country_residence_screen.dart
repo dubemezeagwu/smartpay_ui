@@ -8,7 +8,7 @@ import 'package:smartpay_ui/views/widgets/country_list_picker.dart';
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
 import '../../core/routes/routes.dart';
-import '../login/otp_auth_screen.dart';
+import '../login/login_otp_auth_screen.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 import '../widgets/custom_textfield.dart';

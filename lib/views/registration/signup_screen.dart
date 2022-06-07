@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
+import 'package:smartpay_ui/core/storage/local_storage.dart';
 import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 import 'package:smartpay_ui/views/registration/country_residence_screen.dart';
@@ -219,7 +220,17 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   // SIGN-UP BUTTON
   Widget _signupButton(AuthViewModel model) {
-    return customBlackButton("Sign Up", true, onTap: (){
+    return customBlackButton("Sign Up", true, onTap: () async {
+      var getEmailRequest = {
+        "email" : _userEmail.text
+      };
+      var verifyEmailRequest = {
+        "email" : _userEmail.text,
+        "token" : AppCache.myToken
+      };
+      await model.getEmailToken(getEmailRequest);
+      print("Get Email Response: ${model.authGetEmailResponse}");
+      await model.verifyEmailToken(verifyEmailRequest);
       routeTo(context, CountryResidenceScreen(
         fullName: _fullName.text,
         userPassword: _userEmail.text,

@@ -10,7 +10,7 @@ import '../../core/routes/routes.dart';
 import '../widgets/appbar_back_button.dart';
 import '../widgets/custom_black_button.dart';
 import '../widgets/custom_textfield.dart';
-import 'otp_auth_screen.dart';
+import 'login_otp_auth_screen.dart';
 
 class NewPasswordScreen extends StatefulWidget {
   const NewPasswordScreen({Key? key}) : super(key: key);

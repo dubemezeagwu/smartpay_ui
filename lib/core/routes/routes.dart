@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:smartpay_ui/views/login/login_screen.dart';
 import 'package:smartpay_ui/views/login/new_password_screen.dart';
-import 'package:smartpay_ui/views/login/otp_auth_screen.dart';
+import 'package:smartpay_ui/views/login/login_otp_auth_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 import 'package:smartpay_ui/views/login/reset_password_success_screen.dart';
 import 'package:smartpay_ui/views/onboarding/first_onboarding_screen.dart';
@@ -48,10 +48,10 @@ Route?  generateRoute(RouteSettings settings) {
         view: const PasswordRecoveryScreen(),
         args: settings.arguments,
       );
-    case '/otp_auth_screen':
+    case '/login_otp_auth_screen':
       return _getPageRoute(
         routeName: settings.name,
-        view: const OTPAuthenticationScreen(),
+        view: const LoginOTPAuthenticationScreen(),
         args: settings.arguments,
       );
     case '/new_password_screen':

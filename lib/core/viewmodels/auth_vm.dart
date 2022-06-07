@@ -1,5 +1,6 @@
 import 'package:country_list_pick/support/code_country.dart';
 import 'package:smartpay_ui/core/api/auth_api.dart';
+import 'package:smartpay_ui/core/models/auth_response.dart';
 import 'package:smartpay_ui/core/models/login_response.dart';
 import 'package:smartpay_ui/core/models/register_response.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
@@ -13,13 +14,16 @@ class AuthViewModel extends BaseViewModel{
   final AuthAPI _authAPI = locator<AuthAPI>();
   late LoginData userLoginData;
   late RegisterResponse userRegisterData;
+  late AuthResponse authGetEmailResponse;
+  late AuthResponse authVerifyEmailResponse;
   late String code;
-  late String otp;
+  late String authToken = "";
 
   void setCountryCode (String value){
     code = value;
     notifyListeners();
   }
+
   Future <RegisterResponse?> register (Map<String, dynamic> data ) async {
     setBusy(true);
     try {
@@ -28,6 +32,41 @@ class AuthViewModel extends BaseViewModel{
       userRegisterData = response;
       print(userRegisterData);
       AppCache.setMyToken(userRegisterData.data.token);
+      setBusy(false);
+      return response;
+    } on CustomException catch (e){
+      print(e);
+      setBusy(false);
+    }
+    notifyListeners();
+  }
+
+  Future <AuthResponse?> getEmailToken (Map<String, dynamic> data ) async {
+    setBusy(true);
+    try {
+      final response = await _authAPI.getEmailToken(data);
+      print("VM response: ${response}");
+      authGetEmailResponse = response;
+      print("Auth Token: ${authGetEmailResponse.data.token}");
+      AppCache.setMyToken(authGetEmailResponse.data.token!);
+      // authToken = authGetEmailResponse.data.token!;
+      print(authToken);
+      setBusy(false);
+      return response;
+    } on CustomException catch (e){
+      print(e);
+      setBusy(false);
+    }
+    notifyListeners();
+  }
+
+  Future <AuthResponse?> verifyEmailToken (Map<String, dynamic> data ) async {
+    setBusy(true);
+    try {
+      final response = await _authAPI.verifyEmailToken(data);
+      print(response);
+      authVerifyEmailResponse = response;
+      print(authVerifyEmailResponse.data.email);
       setBusy(false);
       return response;
     } on CustomException catch (e){
