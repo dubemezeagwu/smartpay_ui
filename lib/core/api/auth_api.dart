@@ -53,7 +53,7 @@ class AuthAPI extends BaseAPI {
       switch (res.statusCode) {
         case 200:
           try {
-            return registerResponseFromJson(res.data);
+            return RegisterResponse.fromJson(res.data);
           } catch (e) {
             throw "Parsing Error";
           }
@@ -121,7 +121,7 @@ class AuthAPI extends BaseAPI {
       switch (res.statusCode) {
         case 200:
           try {
-            return authResponseFromJson(res.data);
+            return AuthResponse.fromJson(res.data);
           } catch (e) {
             throw "Parsing Error";
           }

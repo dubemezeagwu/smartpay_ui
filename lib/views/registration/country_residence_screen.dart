@@ -83,10 +83,10 @@ class _CountryResidenceScreenState extends State<CountryResidenceScreen> {
                       const Spacer(),
                   customBlackButton("Continue", true, onTap: (){
                     routeTo(context, CreatePINScreen(userRegistrationData: {
-                      'full_name': 'John',
-                      'email': 'demo@demo.com',
+                      'full_name': widget.fullName,
+                      'email': widget.userEmail,
                       'country': model.code,
-                      'password': 'Dopheus22',
+                      'password': widget.userPassword,
                       'device_name': 'web'
                     },));
                   }),

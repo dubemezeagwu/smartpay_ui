@@ -1,3 +1,7 @@
+// To parse this JSON data, do
+//
+//     final registerResponse = registerResponseFromJson(jsonString);
+
 import 'dart:convert';
 
 RegisterResponse registerResponseFromJson(String str) => RegisterResponse.fromJson(json.decode(str));
@@ -5,13 +9,12 @@ RegisterResponse registerResponseFromJson(String str) => RegisterResponse.fromJs
 String registerResponseToJson(RegisterResponse data) => json.encode(data.toJson());
 
 class RegisterResponse {
-  RegisterResponse( {
+  RegisterResponse({
     required this.status,
     required this.message,
     required this.data,
     required this.meta,
     required this.pagination,
-    required this.error,
   });
 
   final bool status;
@@ -19,15 +22,13 @@ class RegisterResponse {
   final RegisterData data;
   final List<dynamic> meta;
   final List<dynamic> pagination;
-  final Error error;
 
   factory RegisterResponse.fromJson(Map<String, dynamic> json) => RegisterResponse(
-    status: json["status"] ?? false,
-    message: json["message"] ?? "",
-    data: RegisterData.fromJson(json["data"] ?? {}),
-    meta: json["meta"] == null ? [] : List<dynamic>.from(json["meta"].map((x) => x)),
+    status: json["status"],
+    message: json["message"],
+    data: RegisterData.fromJson(json["data"]),
+    meta: List<dynamic>.from(json["meta"].map((x) => x)),
     pagination: List<dynamic>.from(json["pagination"].map((x) => x)),
-    error: Error.fromJson(json["errors"])
   );
 
   Map<String, dynamic> toJson() => {
@@ -49,8 +50,8 @@ class RegisterData {
   final String token;
 
   factory RegisterData.fromJson(Map<String, dynamic> json) => RegisterData(
-    user: User.fromJson(json["user"] ?? {}),
-    token: json["token"] ?? "",
+    user: User.fromJson(json["user"]),
+    token: json["token"],
   );
 
   Map<String, dynamic> toJson() => {
@@ -69,35 +70,24 @@ class User {
   });
 
   final String fullName;
-  final String username;
+  final String? username;
   final String email;
   final String country;
   final String id;
 
   factory User.fromJson(Map<String, dynamic> json) => User(
-    fullName: json["full_name"] ?? "",
+    fullName: json["full_name"],
     username: json["username"] ?? "",
-    email: json["email"] ?? "",
-    country: json["country"] ?? "",
-    id: json["id"] ?? "",
+    email: json["email"],
+    country: json["country"],
+    id: json["id"],
   );
 
   Map<String, dynamic> toJson() => {
     "full_name": fullName,
-    "username": username,
+    if (username != null) "username": username ,
     "email": email,
     "country": country,
     "id": id,
   };
-}
-class Error {
-  final List<dynamic>? email;
-
-  Error ({
-    this.email
-});
-
-  factory Error.fromJson(Map<String, dynamic> json) => Error(
-    email: json["email"] == null ? [] : List.from(json["email"].map((x) => x)),
-  );
 }

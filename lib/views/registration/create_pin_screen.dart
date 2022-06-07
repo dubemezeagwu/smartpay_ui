@@ -141,14 +141,9 @@ class _CreatePINScreenState extends State<CreatePINScreen> {
           print(appPassCode);
           AppCache.setMyPIN(appPassCode);
           print("This is the App PIN ${AppCache.myPIN}");
-          model.register(widget.userRegistrationData).then(
-                  (value) {
-                    if (value?.message != "success"){
-                      ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text(value!.error.email?.first)));
-                    }
-                  });
-          // routeTo(context, SignUpConfirmationScreen());
+          print("Sign Up details: ${widget.userRegistrationData}");
+          model.register(widget.userRegistrationData);
+          routeTo(context, SignUpConfirmationScreen());
         }
         );
   }

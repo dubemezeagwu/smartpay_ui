@@ -30,8 +30,8 @@ class AuthViewModel extends BaseViewModel{
       final response = await _authAPI.register(data);
       print(response);
       userRegisterData = response;
-      print(userRegisterData);
-      AppCache.setMyToken(userRegisterData.data.token);
+      print("User Register Data ${userRegisterData}");
+      // AppCache.setMyToken(userRegisterData.data.token);
       setBusy(false);
       return response;
     } on CustomException catch (e){

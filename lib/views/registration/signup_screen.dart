@@ -233,8 +233,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
       await model.verifyEmailToken(verifyEmailRequest);
       routeTo(context, CountryResidenceScreen(
         fullName: _fullName.text,
-        userPassword: _userEmail.text,
-        userEmail: _userPassword.text,
+        userPassword: _userPassword.text,
+        userEmail: _userEmail.text,
       ));
     });
   }
