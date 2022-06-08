@@ -12,7 +12,7 @@ import '../storage/local_storage.dart';
 
 class AuthViewModel extends BaseViewModel{
   final AuthAPI _authAPI = locator<AuthAPI>();
-  late LoginData userLoginData;
+  late LoginResponse userLoginData;
   late RegisterResponse userRegisterData;
   late AuthResponse authGetEmailResponse;
   late AuthResponse authVerifyEmailResponse;
@@ -23,6 +23,24 @@ class AuthViewModel extends BaseViewModel{
     code = value;
     notifyListeners();
   }
+
+  Future <LoginResponse?> login (Map<String, dynamic> data ) async {
+    setBusy(true);
+    try {
+      final response = await _authAPI.login(data);
+      print(response);
+      userLoginData = response;
+      print("User Login Data ${userLoginData}");
+      // AppCache.setMyToken(userRegisterData.data.token);
+      setBusy(false);
+      return response;
+    } on CustomException catch (e){
+      print(e);
+      setBusy(false);
+    }
+    notifyListeners();
+  }
+
 
   Future <RegisterResponse?> register (Map<String, dynamic> data ) async {
     setBusy(true);

@@ -11,15 +11,15 @@ import '../utils/error_util.dart';
 class AuthAPI extends BaseAPI {
   Logger log = Logger();
 
-  Future<LoginData> login(Map<String, String> data) async {
+  Future<dynamic> login(Map<String, dynamic> data) async {
     const String url = 'auth/login';
     try {
-      final Response<dynamic> res = await dio.post<dynamic>(url, data: data, options: defaultOptions);
+      final Response<dynamic> res = await dio.post<dynamic>(url, data: data,);
       log.d(res.data);
       switch (res.statusCode) {
         case 200:
           try {
-            return LoginResponse.fromJson(res.data).data;
+            return LoginResponse.fromJson(res.data);
           } catch (e) {
             throw "Parsing Error";
           }

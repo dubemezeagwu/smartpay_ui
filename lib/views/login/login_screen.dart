@@ -8,6 +8,9 @@ import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/app/config/size_config.dart';
 import 'package:smartpay_ui/app/styles.dart';
 import 'package:smartpay_ui/core/routes/routes.dart';
+import 'package:smartpay_ui/core/viewmodels/auth_vm.dart';
+import 'package:smartpay_ui/views/base_view.dart';
+import 'package:smartpay_ui/views/home/home_screen.dart';
 import 'package:smartpay_ui/views/login/new_password_screen.dart';
 import 'package:smartpay_ui/views/login/password_recovery_screen.dart';
 import 'package:smartpay_ui/views/registration/signup_screen.dart';
@@ -15,6 +18,7 @@ import 'package:smartpay_ui/views/widgets/appbar_back_button.dart';
 import 'package:smartpay_ui/views/widgets/custom_black_button.dart';
 import 'package:smartpay_ui/views/widgets/other_signin_button.dart';
 
+import '../../core/viewmodels/home_vm.dart';
 import '../widgets/custom_textfield.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -48,71 +52,73 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return GestureDetector(
-      onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child: Scaffold(
-        key: _pageKey,
-        appBar: AppBar(
-          leading: appBarBackButton(),
-        ),
-        body: SafeArea(
-          child: SingleChildScrollView(
-            child: Form(
-              key: _formPageKey,
-              child: SizedBox(
-                height: SizeConfig.screenHeight,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    Text("Hi There! 👋",style: boldBlack24,),
-                    SizedBox(
-                      height: 8.h,
-                    ),
-                    Text("Welcome back, Sign in to your account",style: regularGrey16,),
-                    SizedBox(
-                      height: 32.h,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        _emailPasswordWidget(),
-                        SizedBox(height: 24.h,),
-                        _forgotPassword(),
-                        SizedBox(height: 24.h,),
-                        _loginButton(),
-                        SizedBox(height: 32.h,),
-                        Center(child: Text("OR", style: regularGrey16,)),
-                        SizedBox(height: 35.h,),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            GestureDetector(
-                                onTap: (){},
-                                child: otherSignInButton(AppAssets.googleLogo)
-                            ),
-                            GestureDetector(
-                                onTap: (){},
-                                child: otherSignInButton(AppAssets.appleLogo)
-                            ),
-                          ],
-                        ),
-                        SizedBox(height: 160.h,),
-                      ],
-                    ),
-                    Align(
-                      alignment: Alignment.bottomCenter,
-                        child: _createAccountLabel())
-                  ],
+    return BaseView(builder: (_, AuthViewModel model, __){
+      return GestureDetector(
+        onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
+        child: Scaffold(
+          key: _pageKey,
+          appBar: AppBar(
+            leading: appBarBackButton(),
+          ),
+          body: SafeArea(
+            child: SingleChildScrollView(
+              child: Form(
+                key: _formPageKey,
+                child: SizedBox(
+                  height: SizeConfig.screenHeight,
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Text("Hi There! 👋",style: boldBlack24,),
+                      SizedBox(
+                        height: 8.h,
+                      ),
+                      Text("Welcome back, Sign in to your account",style: regularGrey16,),
+                      SizedBox(
+                        height: 32.h,
+                      ),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _emailPasswordWidget(),
+                          SizedBox(height: 24.h,),
+                          _forgotPassword(),
+                          SizedBox(height: 24.h,),
+                          _loginButton(model),
+                          SizedBox(height: 32.h,),
+                          Center(child: Text("OR", style: regularGrey16,)),
+                          SizedBox(height: 35.h,),
+                          Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: otherSignInButton(AppAssets.googleLogo)
+                              ),
+                              GestureDetector(
+                                  onTap: (){},
+                                  child: otherSignInButton(AppAssets.appleLogo)
+                              ),
+                            ],
+                          ),
+                          SizedBox(height: 160.h,),
+                        ],
+                      ),
+                      Align(
+                          alignment: Alignment.bottomCenter,
+                          child: _createAccountLabel())
+                    ],
+                  ),
                 ),
               ),
             ),
           ),
         ),
-      ),
-    );
+      );
+    });
   }
 
   // TOGGLES PASSWORD VISIBILITY
@@ -180,8 +186,17 @@ class _LoginScreenState extends State<LoginScreen> {
   }
 
   // SIGN-IN BUTTON
-  Widget _loginButton() {
-    return customBlackButton("Sign In", true, onTap: (){},);
+  Widget _loginButton(AuthViewModel model) {
+    return customBlackButton("Sign In", true, onTap: (){
+      var loginDetails = <String,String>{
+        "email" : _userEmail.text,
+        "password" : _userPassword.text,
+        "device_name" : "web"
+      };
+
+      model.login(loginDetails);
+      routeTo(context, HomeScreen());
+    },);
   }
 
   // FORGOT PASSWORD

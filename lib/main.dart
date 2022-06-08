@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/app/config/size_config.dart';
@@ -24,19 +25,22 @@ class MyApp extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 24),
       color: AppColors.background,
-      child: MaterialApp(
-        onGenerateRoute: generateRoute,
-        initialRoute: '/splash_screen',
-        debugShowCheckedModeBanner: false,
-        title: 'SmartPay',
-        theme: ThemeData(
-          scaffoldBackgroundColor: AppColors.background,
-          backgroundColor: AppColors.background,
-          appBarTheme: const AppBarTheme(
-            elevation: 0,
-            color: AppColors.background,
+      child: MultiProvider(
+        providers: allProviders,
+        child: MaterialApp(
+          onGenerateRoute: generateRoute,
+          initialRoute: '/splash_screen',
+          debugShowCheckedModeBanner: false,
+          title: 'SmartPay',
+          theme: ThemeData(
+            scaffoldBackgroundColor: AppColors.background,
+            backgroundColor: AppColors.background,
+            appBarTheme: const AppBarTheme(
+              elevation: 0,
+              color: AppColors.background,
+            ),
+            primarySwatch: Colors.blue,
           ),
-          primarySwatch: Colors.blue,
         ),
       ),
     );

@@ -90,6 +90,12 @@ Route?  generateRoute(RouteSettings settings) {
         view: const SignUpConfirmationScreen(),
         args: settings.arguments,
       );
+    case '/home_screen':
+      return _getPageRoute(
+        routeName: settings.name,
+        view: const SignUpConfirmationScreen(),
+        args: settings.arguments,
+      );
     default:
       return MaterialPageRoute<dynamic>(
         builder: (_) => Scaffold(
