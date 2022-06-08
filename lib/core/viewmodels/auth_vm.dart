@@ -31,7 +31,8 @@ class AuthViewModel extends BaseViewModel{
       print(response);
       userLoginData = response;
       print("User Login Data ${userLoginData}");
-      // AppCache.setMyToken(userRegisterData.data.token);
+      print(userLoginData.data.token);
+      AppCache.setMyToken(userLoginData.data.token);
       setBusy(false);
       return response;
     } on CustomException catch (e){

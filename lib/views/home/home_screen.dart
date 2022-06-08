@@ -4,6 +4,7 @@ import 'package:smartpay_ui/app/colors.dart';
 import 'package:smartpay_ui/app/config/extensions.dart';
 import 'package:smartpay_ui/core/viewmodels/home_vm.dart';
 import 'package:smartpay_ui/views/base_view.dart';
+import 'package:smartpay_ui/views/widgets/custom_black_button.dart';
 
 import '../../app/config/size_config.dart';
 import '../../app/styles.dart';
@@ -22,7 +23,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     SizeConfig.init(context);
-    return BaseView(builder: (_, HomeViewModel model, __){
+    return BaseView(onModelReady: (HomeViewModel model) => model.getMessage() ,builder: (_, HomeViewModel model, __){
       return GestureDetector(
         onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
         child: Scaffold(
@@ -41,8 +42,12 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Center(
-                      child: Text("Secret Message"),
-                    )
+                      child: Text(model.message.toString()),
+                    ),
+                    SizedBox(height: 100.h,),
+                    customBlackButton("Get secret message", true, onTap: (){
+                      model.getMessage();
+                    })
                   ],
                 ),
               ),
