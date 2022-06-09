@@ -94,4 +94,17 @@ class AuthViewModel extends BaseViewModel{
     }
     notifyListeners();
   }
+
+  Future <dynamic> logout (Map<String, dynamic> data) async {
+    setBusy(true);
+    try {
+      final response = await _authAPI.logout(data);
+      if (response.d)
+      print(response);
+      setBusy(false);
+    } on CustomException catch (e){
+      print(e);
+      setBusy(false);
+    }
+  }
 }
